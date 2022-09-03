@@ -16,11 +16,20 @@ colors = {
 i_colors = {v: k for k, v in colors.items()}
 
 def new_get_values(val):
+    # 00     000
+    # |Color |Type
+    #
     binary = '{0:05b}'.format(val)
 
-    color = colors[int(binary[:2] + '000',2)]
+    try:
+        color = colors[int(binary[:2],2) << 3]
+    except KeyError:
+        color = None
 
-    piece = pieces[int(binary[2:], 2)]
+    try:
+        piece = pieces[int(binary[2:], 2)]
+    except KeyError:
+        piece = None
 
     # print(binary)
     # print(color)
